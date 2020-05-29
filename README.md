@@ -129,5 +129,6 @@ An example of PINN solver for the wave equation is implemented in `main.py`. The
 
 An example using Dirichlet boundary condition is demonstrated below.
 ![result_img](result_img_dirichlet.png)
+
 Another example using Neumann boundary condition is shown below.
 ![result_img](result_img_neumann.png)
