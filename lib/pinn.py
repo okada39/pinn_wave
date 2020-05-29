@@ -52,8 +52,8 @@ class PINN:
         # initial condition output
         u_ini, du_dt_ini, _, _, _ = self.grads(tx_ini)
         # boundary condition output
-        #u_bnd = self.network(tx_bnd)  # dirichlet
-        _, _, u_bnd, _, _ = self.grads(tx_bnd)  # neumann
+        u_bnd = self.network(tx_bnd)  # dirichlet
+        #_, _, u_bnd, _, _ = self.grads(tx_bnd)  # neumann
 
         # build the PINN model for the wave equation
         return tf.keras.models.Model(
