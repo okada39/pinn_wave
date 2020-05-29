@@ -8,14 +8,36 @@ from lib.pinn import PINN
 from lib.network import Network
 from lib.optimizer import L_BFGS_B
 
+def u0(tx, c=1, k=2, sd=0.5):
+    """
+    Initial wave form.
 
-def u0(tx, c=1, k=2, a=1):
+    Args:
+        tx: variables (t, x) as tf.Tensor.
+        c: wave velocity.
+        k: wave number.
+        sd: standard deviation.
+
+    Returns:
+        u(t, x) as tf.Tensor.
+    """
+
     t = tx[..., 0, None]
     x = tx[..., 1, None]
     z = k*x - (c*k)*t
-    return tf.sin(z) * tf.exp(-(a*z)**2)
+    return tf.sin(z) * tf.exp(-(0.5*z/sd)**2)
 
 def du0_dt(tx):
+    """
+    First derivative of t for the initial wave form.
+
+    Args:
+        tx: variables (t, x) as tf.Tensor.
+
+    Returns:
+        du(t, x)/dt as tf.Tensor.
+    """
+
     with tf.GradientTape() as g:
         g.watch(tx)
         u = u0(tx)
@@ -89,4 +111,5 @@ if __name__ == '__main__':
         plt.xlabel('x')
         plt.ylabel('u(t,x)')
     plt.tight_layout()
+    plt.savefig('result_img_neumann.png', transparent=True)
     plt.show()
