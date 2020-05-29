@@ -96,19 +96,19 @@ An example of PINN solver for the wave equation is implemented in `main.py`. The
     ```
 4. Building training output. We give an initial wave distribution `u0` and the 1st derivative of t `du0/dt`.
     ```python
+    # initial wave distribution
     def u0(tx, c=1, k=2, sd=0.5):
         t = tx[..., 0, None]
         x = tx[..., 1, None]
         z = k*x - (c*k)*t
         return tf.sin(z) * tf.exp(-(0.5*z/sd)**2)
-
+    # du0/dt
     def du0_dt(tx):
         with tf.GradientTape() as g:
             g.watch(tx)
             u = u0(tx)
         du_dt = g.batch_jacobian(u, tx)[..., 0]
         return du_dt
-
     # create training output
     u_zero = np.zeros((num_train_samples, 1))
     u_ini = u0(tf.constant(tx_ini)).numpy()
