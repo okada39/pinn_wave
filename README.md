@@ -13,7 +13,7 @@ The effectiveness of PINNs is validated in the following works.
 
 In addition, an effective convergent optimizer is required to solve the differential equations accurately using PINNs. The stochastic gradient dicent is generally used in deep learnigs, but it only depends on the primary gradient (Jacobian). In contrast, the quasi-Newton based approach such as the limited-memory Broyden-Fletcher-Goldfarb-Shanno method for bound constraints (L-BFGS-B) incorporates the quadratic gradient (Hessian), and gives a more accurate convergence.
 
-Here we implement a PINN model with the L-BFGS-B optimization for Burgers' equation.
+Here we implement a PINN model with the L-BFGS-B optimization for the wave equation.
 Scripts is given as follows.
 
 * *lib : libraries to implement the PINN model for a projectile motion.*
